@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Doge - AI in Your Hands</title>
+    <link rel="icon" type="image/jpg" href="resource/aidogeicon.jpg">
+    <style>
+        /* Previous styles remain unchanged until .product-info */
+        :root {
+            --primary: #ff6b00;
+            --secondary: #1a1a1a;
+            --accent: #007bff;
+            --light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--secondary);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--secondary);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light);
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero p {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Products Section */
+        .products {
+            width: 100%;
+            height: auto;
+            scroll-behavior: smooth;
+            overflow: visible;
+        }
+
+        .product-card {
+            min-height: 80vh; /* Reduced from 100vh */
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Equal columns */
+            padding: 2rem; /* Reduced from 4rem */
+            gap: 2rem; /* Reduced from 4rem */
+            align-items: center;
+            position: relative;
+        }
+
+        .product-image-container {
+            opacity: 0;
+            transform: translateX(-100%);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-card.visible .product-image-container {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .product-image {
+            width: 100%; /* Take full width of container */
+            height: 100%; /* Take full height of container */
+            max-width: 600px; /* Add max-width to prevent too large images */
+            max-height: 600px; /* Add max-height to maintain aspect ratio */
+            background-size: cover;
+            background-position: center;
+            border-radius: 60px; /* Increased border radius */
+            transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+            box-shadow: 20px 20px 50px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+        }
+
+        .product-image:hover {
+            transform: perspective(1000px) rotateY(0) rotateX(0);
+            box-shadow: 30px 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .product-info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem; /* Reduced from 2rem */
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-right: 2rem; /* Reduced from 3rem */
+        }
+
+        .product-card.visible .product-info-container {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .product-info {
+            text-align: left;
+        }
+
+        .product-info h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem; /* Reduced from 1rem */
+        }
+
+        .product-info p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem; /* Reduced from 2rem */
+            color: #666;
+        }
+
+        .product-info .ai-badge {
+            background: var(--accent);
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 0.5rem; /* Reduced from 1rem */
+        }
+
+        .product-info a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
+
+        .product-info .buy-now-button::before {
+            content: "🛒";             /* 添加购物车 emoji */
+            font-size: 1.2rem;        /* 设置图标大小 */
+            margin-right: 0.3rem;     /* 图标和文字之间的间距 */
+        }
+        
+        .product-info .buy-now-button {
+            background: #ff4444;
+            color: white;
+            padding: 0.3rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: none !important;
+        }
+/* 
+        .product-info a[href*="Buy"]::before {
+            content: "🛒";
+            font-size: 1.2rem;
+        }
+
+        .product-info a[href*="Buy"]:hover {
+            background: #ff6666;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-bottom: none;
+            color: white;
+        }
+
+        .product-info a:not([href*="Buy"]):hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        } */
+
+        .product-demo {
+            width: 100%; /* Fill container width */
+            height: 33vh;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 1rem; /* Reduced from 2rem */
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--secondary);
+            color: var(--light);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .contact.visible .social-links a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact.visible .social-links a:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .contact.visible .social-links a:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .contact.visible .social-links a:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .product-card {
+                grid-template-columns: 1fr;
+                padding: 1rem; /* Reduced from 2rem */
+                gap: 1rem; /* Reduced from 2rem */
+            }
+            
+            .product-image {
+                width: 100%;
+                max-width: 400px; /* Smaller max-width for mobile */
+                height: auto;
+                aspect-ratio: 1; /* Maintain square aspect ratio */
+            }
+
+            .product-demo {
+                width: 100%;
+                height: 33vh;
+                aspect-ratio: 1;
+            
+            }
+        }
+    </style>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GNKZ2CRF53"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GNKZ2CRF53');
+</script>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div>
+            <h1>AI-Doge</h1>
+            <p>Bringing AI Power to Your Device</p>
+        </div>
+    </section>
+
+    <section id="products" class="products">
+        <div class="product-card">
+            <div class="product-image-container">
+                <div class="product-image" style="background-image: url('resource/FaceRefreshIcon.jpg'); animation: scrollImageHorizontal 15s linear infinite;">
+                    <style>
+                        @keyframes scrollImageHorizontal {
+                            0% {
+                                background-position: left center;
+                            }
+                            50% {
+                                background-position: right center;
+                            }
+                            100% {
+                                background-position: left center;
+                            }
+                        }
+                        
+                        .product-image {
+                            background-size: cover;
+                            background-repeat: no-repeat;
+                            background-position: left center;
+                        }
+                    </style>
+                </div>
+            </div>
+            <div class="product-info-container">
+                <div class="product-info">
+                    <h3>FaceRefresh</h3>
+                    <p>Repairs old, blurry, and scratched photos right on your device.</p>
+                    <a href="https://apps.apple.com/app/facerefresh-ai-photo-restorer/id6463642671" class="buy-now-button">Buy Now</a>
+                    <a href="face_refresh_intro.html">Learn More →</a>
+                </div>
+                <div class="product-demo" style="background-image: url('resource/FaceRefresh.jpg');">
+                    <style>
+                        .product-demo {
+                            background-position: center;
+                            transition: background-position 0.1s ease;
+                        }
+                    </style>
+                    <script>
+                        document.addEventListener('scroll', () => {
+                            const demos = document.querySelectorAll('.product-demo');
+                            const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+                            demos.forEach((demo, index) => {
+                                // Reduce the effect for each subsequent element
+                                const factor = 1 - (index * 0.25); // Decrease by 25% for each element
+                                const y = scrollPercent * 150 * factor;
+                                demo.style.backgroundPosition = `center ${y}%`;
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <div class="product-image" style="background-image: url('resource/SegmentAnythingIcon.jpg')"></div>
+            </div>
+            <div class="product-info-container">
+                <div class="product-info">
+                    <h3>Segment Anything</h3>
+                    <p>Click to crop anything in Images on your iPhone.</p>
+                    <a href="https://apps.apple.com/app/segment-anything/id6447527235" class="buy-now-button">Buy Now</a>
+                    <a href="https://apps.apple.com/app/segment-anything/id6447527235">Learn More →</a>
+                </div>
+                <div class="product-demo" style="background-image: url('resource/SegmentAnythingAfter.jpg');">
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <div class="product-image" style="background-image: url('resource/AIDeepDreamIcon.jpg')"></div>
+            </div>
+            <div class="product-info-container">
+                <div class="product-info">
+                    <h3>AI Deep Dream</h3>
+                    <p>Creating a dream-like hallucinogenic appearance in the deliberately over-processed images just on your iPhone.</p>
+                    <a href="https://apps.apple.com/app/ai-deep-dream/id1619582939" class="buy-now-button">Buy Now</a>
+                    <a href="https://apps.apple.com/app/ai-deep-dream/id1619582939">Learn More →</a>
+                </div>
+                <div class="product-demo" style="background-image: url('resource/AIDeepDreamDemo.jpg')"></div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <div class="product-image" style="background-image: url('resource/NolingoIcon.jpg')"></div>
+            </div>
+            <div class="product-info-container">
+                <div class="product-info">
+                    <h3>Nolingo Screen Translator</h3>
+                    <p>Translate all text on your screen in real-time without Network on your mac.</p>
+                    <a href="https://apps.apple.com/app/nolingo-screen-translator/id6683311090?mt=12" class="buy-now-button">Buy Now</a>
+                    <a href="nolingo_intro.html">Learn More →</a>
+                </div>
+                <div class="product-demo" style="background-image: url('resource/NolingoDemo.jpg')"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Get in Touch</h2>
+        <div class="social-links">
+            <a href="https://twitter.com/aidogeshow" target="_blank">Twitter</a>
+            <a href="https://github.com/ai-doge" target="_blank">GitHub</a>
+            <a href="mailto:aidoge.ys@gmail.com">Email</a>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer to trigger animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.3
+        });
+
+        // Observe all product cards and contact section
+        document.querySelectorAll('.product-card, .contact').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

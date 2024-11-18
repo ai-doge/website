@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoLingo - Real-time Screen Translation App for macOS | No Network Required</title>
+    
+    <!-- English Meta -->
+    <meta name="description" content="NoLingo is a powerful screen translation app for macOS that works offline. Translate text from Chinese, Japanese, Korean, French, German, Italian and Spanish in real-time without internet connection.">
+    <meta name="keywords" content="screen translator, macOS translation app, offline translation, real-time translation, Chinese translator, Japanese translator, Korean translator">
+    
+    <!-- Chinese Meta -->
+    <meta name="description" lang="zh" content="NoLingo 是一款功能强大的 macOS 离线屏幕翻译应用。无需网络即可实时翻译中文、日语、韩语、法语、德语、意大利语和西班牙语文本。">
+    <meta name="keywords" lang="zh" content="屏幕翻译器, macOS翻译应用, 离线翻译, 实时翻译, 中文翻译器, 日语翻译器, 韩语翻译器">
+    
+    <!-- Japanese Meta -->
+    <meta name="description" lang="ja" content="NoLingoはmacOS用のパワフルなオフライン画面翻訳アプリです。インターネット接続なしで中国語、日本語、韓国語、フランス語、ドイツ語、イタリア語、スペイン語のテキストをリアルタイムで翻訳できます。">
+    <meta name="keywords" lang="ja" content="画面翻訳, macOS翻訳アプリ, オフライン翻訳, リアルタイム翻訳, 中国語翻訳, 日本語翻訳, 韓国語翻訳">
+    
+    <!-- Korean Meta -->
+    <meta name="description" lang="ko" content="NoLingo는 macOS용 강력한 오프라인 화면 번역 앱입니다. 인터넷 연결 없이 중국어, 일본어, 한국어, 프랑스어, 독일어, 이탈리아어 및 스페인어 텍스트를 실시간으로 번역할 수 있습니다.">
+    <meta name="keywords" lang="ko" content="화면 번역기, macOS 번역 앱, 오프라인 번역, 실시간 번역, 중국어 번역기, 일본어 번역기, 한국어 번역기">
+
+    <!-- German Meta -->
+    <meta name="description" lang="de" content="NoLingo ist eine leistungsstarke Offline-Bildschirmübersetzungs-App für macOS. Übersetzen Sie Texte aus dem Chinesischen, Japanischen, Koreanischen, Französischen, Deutschen, Italienischen und Spanischen in Echtzeit ohne Internetverbindung.">
+    <meta name="keywords" lang="de" content="Bildschirmübersetzer, macOS Übersetzungs-App, Offline-Übersetzung, Echtzeit-Übersetzung, Chinesisch Übersetzer, Japanisch Übersetzer, Koreanisch Übersetzer">
+
+    <!-- French Meta -->
+    <meta name="description" lang="fr" content="NoLingo est une puissante application de traduction d'écran hors ligne pour macOS. Traduisez en temps réel des textes du chinois, japonais, coréen, français, allemand, italien et espagnol sans connexion Internet.">
+    <meta name="keywords" lang="fr" content="traducteur d'écran, application de traduction macOS, traduction hors ligne, traduction en temps réel, traducteur chinois, traducteur japonais, traducteur coréen">
+
+    <!-- Italian Meta -->
+    <meta name="description" lang="it" content="NoLingo è una potente app di traduzione dello schermo offline per macOS. Traduci in tempo reale testi da cinese, giapponese, coreano, francese, tedesco, italiano e spagnolo senza connessione Internet.">
+    <meta name="keywords" lang="it" content="traduttore schermo, app traduzione macOS, traduzione offline, traduzione in tempo reale, traduttore cinese, traduttore giapponese, traduttore coreano">
+
+    <!-- Spanish Meta -->
+    <meta name="description" lang="es" content="NoLingo es una potente aplicación de traducción de pantalla sin conexión para macOS. Traduce textos del chino, japonés, coreano, francés, alemán, italiano y español en tiempo real sin conexión a Internet.">
+    <meta name="keywords" lang="es" content="traductor de pantalla, aplicación de traducción macOS, traducción sin conexión, traducción en tiempo real, traductor chino, traductor japonés, traductor coreano">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="NoLingo - Real-time Screen Translation App for macOS">
+    <meta property="og:description" content="Translate text on your screen in real-time without internet connection. Support for 8 languages including English, French, German, Italian, Spanish, Chinese, Japanese and Korean.">
+    <meta property="og:image" content="resource/NoLingoIcon.jpg">
+    <meta property="og:url" content="https://aidoge.ai/app/nolingo.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aidoge.ai/app/nolingo.html">
+    
+    <link rel="icon" type="image/jpg" href="resource/NoLingoIcon.jpg">
+    <style>
+        :root {
+            --primary: #f1bcd6;
+            --secondary: #1a1a1a;
+            --light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--secondary);
+            overflow-x: hidden;
+        }
+
+        .hero {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 15vh;
+        }
+
+        .language-stripes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+
+        .stripe {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 2.0rem;
+            position: relative;
+            overflow: hidden;
+            transition: flex 0.3s ease;
+        }
+
+        .stripe:first-child {
+            margin-left: 0;
+        }
+
+        .stripe:nth-child(1) { background: linear-gradient(180deg, #eddec3 0%, #eddec3 100%); z-index: 8; }
+        .stripe:nth-child(2) { background: linear-gradient(180deg, #FE9179 0%, #FE9179 100%); z-index: 7; }
+        .stripe:nth-child(3) { background: linear-gradient(180deg, #CFB97E 0%, #CFB97E 100%); z-index: 6; }
+        .stripe:nth-child(4) { background: linear-gradient(180deg, #B89D47 0%, #B89D47 100%); z-index: 5; }
+        .stripe:nth-child(5) { background: linear-gradient(180deg, #053229 0%, #053229 100%); z-index: 4; }
+        .stripe:nth-child(6) { background: linear-gradient(180deg, #355E58 0%, #355E58 100%); z-index: 3; }
+        .stripe:nth-child(7) { background: linear-gradient(180deg, #72B0AB 0%, #72B0AB 100%); z-index: 2; }
+        .stripe:nth-child(8) { background: linear-gradient(180deg, #BCDDDC 0%, #BCDDDC 100%); z-index: 1; }
+
+        .text-content {
+            position: relative;
+            opacity: 0;
+            transition: all 0s ease;
+            min-width: 200px;
+            max-width: 600px;
+            white-space: normal;
+            line-height: 1.4;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            margin: 10px 0;
+            font-size: 1.8rem;
+            text-align: left;
+        }
+
+        .text-content.active {
+            opacity: 1;
+            font-size: 1.5 rem;
+            font-weight: bold;
+            -webkit-line-clamp: unset;
+            position: absolute;
+            top: 66.67%;
+            transform: translateY(-50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: 9rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            min-height: 1.5em;
+        }
+
+        .hero-content p::after {
+            content: '|';
+            animation: blink 0.3s infinite;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            transform: translate(-50%, 0);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+            animation: bounce 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            padding: 4rem;
+        }
+
+        .mac-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .mac-frame {
+            width: 100%;
+            height: 100%;
+            background: url('resource/mac_frame.png') no-repeat center;
+            background-size: contain;
+            position: absolute;
+            padding: 3% 11.5% 18.5% 11.5%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .translation-demo {
+            width: 95%;
+            height: 35%;
+            min-width: 300px;
+            background: transparent;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 54%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+        }
+
+        .floating-text {
+            position: absolute;
+            white-space: nowrap;
+            animation: floatText 10s linear infinite;
+            transform: translateY(-50%);
+        }
+
+        .floating-text.top {
+            top: 30%;
+            animation: floatTextTop 11s linear infinite;
+        }
+
+        .floating-text.bottom {
+            top: 70%;
+            animation: floatTextBottom 10s linear infinite;
+            animation-delay: 1s;
+        }
+
+        .translation-overlay {
+            position: absolute;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transform: translateY(calc(-50% + 30px));
+        }
+
+        .translation-overlay::before {
+            content: '';
+            background-image: url('resource/NoLingoIcon.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-right: 5px;
+            width: 21px;
+            height: 21px;
+            display: inline-block;
+            vertical-align: middle;
+            transform: scale(1);
+            transition: transform 0.2s ease;
+            border-radius: 10%;
+        }
+
+        .translation-overlay:hover::before {
+            transform: scale(1.1);
+        }
+
+        .translation-overlay.top {
+            top: 30%;
+            animation: floatOverlayTop 11s linear infinite;
+        }
+
+        .translation-overlay.bottom {
+            top: 70%;
+            animation: floatOverlayBottom 10s linear infinite;
+            animation-delay: 1s;
+        }
+
+        @keyframes floatTextTop {
+            0% { left: 100%; opacity: 1; }
+            33.33% { left: 33.33%; opacity: 1; }
+            33.34% { left: 33.32%; opacity: 1; }
+            100% { left: -100%; opacity: 1; }
+        }
+
+        @keyframes floatTextBottom {
+            0% { left: 100%; opacity: 1; }
+            33.33% { left: 33.33%; opacity: 1; }
+            33.34% { left: 33.32%; opacity: 1; }
+            100% { left: -100%; opacity: 1; }
+        }
+
+        @keyframes floatOverlayTop {
+            0% { left: 100%; opacity: 0; }
+            10.33% { left: 33.33%; opacity: 0; }
+            33.34% { left: 33.32%; opacity: 1; }
+            100% { left: -100%; opacity: 1; }
+        }
+
+        @keyframes floatOverlayBottom {
+            0% { left: 100%; opacity: 0; }
+            10.33% { left: 33.33%; opacity: 0; }
+            33.34% { left: 33.32%; opacity: 1; }
+            100% { left: -100%; opacity: 1; }
+        }
+
+        .features {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .features h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .language-list {
+            list-style: none;
+        }
+
+        .language-item {
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: rgba(241, 188, 214, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .language-item:hover {
+            transform: translateX(10px);
+            background: rgba(241, 188, 214, 0.2);
+        }
+
+        .language-item.active {
+            background: rgba(241, 188, 214, 0.3);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feature-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(241, 188, 214, 0.4);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: calc(var(--index) * 0.3s);
+        }
+
+        /* .feature-item:hover {
+            transform: translateX(10px);
+            background: rgba(241, 188, 214, 0.2);
+        } */
+    </style>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GNKZ2CRF53"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GNKZ2CRF53');
+</script>
+
+<body>
+    <section class="hero">
+        <div class="language-stripes">
+            <div class="stripe">
+                <div class="text-content active">
+                    It was the best of times, it was the worst of times.
+                </div>
+                <div class="text-content">
+                    这是最好的时代，这是最坏的时代。
+                </div>
+                <div class="text-content">
+                    C'était le meilleur des temps, c'était le pire des temps.
+                </div>
+                <div class="text-content">
+                    Era il tempo migliore e il tempo peggiore.
+                </div>
+                <div class="text-content">
+                    Era el mejor de los tiempos y el peor de los tiempos.
+                </div>
+                <div class="text-content">
+                    Es war die beste Zeit, es war die schlimmste Zeit.
+                </div>
+                <div class="text-content">
+                    最高の時代であり、最悪の時代でありました。
+                </div>
+                <div class="text-content">
+                    최고의 시대이자 최악의 시대였다.
+                </div>
+            </div>
+            <div class="stripe">
+                <div class="text-content active">
+                    生存还是毁灭，这是一个问题。
+                </div>
+                <div class="text-content">
+                    Être ou ne pas être, telle est la question.
+                </div>
+                <div class="text-content">
+                    Essere o non essere, questo è il dilemma.
+                </div>
+                <div class="text-content">
+                    Ser o no ser, esa es la cuestión.
+                </div>
+                <div class="text-content">
+                    Sein oder Nichtsein, das ist hier die Frage.
+                </div>
+                <div class="text-content">
+                    生きるべきか死ぬべきか、それが問題だ。
+                </div>
+                <div class="text-content">
+                    삶이냐 죽음이냐, 그것이 문제로다.
+                </div>
+                <div class="text-content">
+                    To be, or not to be, that is the question.
+                </div>
+            </div>
+            <div class="stripe">
+                <div class="text-content active">
+                    Le monde entier est un théâtre, et tous les hommes et les femmes ne sont que des acteurs.
+                </div>
+                <div class="text-content">
+                    Il mondo intero è un palcoscenico, e tutti gli uomini e le donne sono soltanto attori.
+                </div>
+                <div class="text-content">
+                    El mundo entero es un escenario, y todos los hombres y mujeres son simplemente actores.
+                </div>
+                <div class="text-content">
+                    Die ganze Welt ist eine Bühne, und alle Männer und Frauen sind nur Spieler.
+                </div>
+                <div class="text-content">
+                    世界は舞台であり、すべての男女は単なる役者にすぎない。
+                </div>
+                <div class="text-content">
+                    세상은 무대이고, 모든 남녀는 단지 배우일 뿐이다.
+                </div>
+                <div class="text-content">
+                    All the world's a stage, and all the men and women merely players.
+                </div>
+                <div class="text-content">
+                    世界是一个舞台，所有的男男女女不过是演员。
+                </div>
+            </div>
+            <div class="stripe">
+                <div class="text-content active">
+                    Ama a todos, confía en pocos, no hagas daño a nadie.
+                </div>
+                <div class="text-content">
+                    Liebe alle, vertraue wenigen, tue niemandem Unrecht.
+                </div>
+                <div class="text-content">
+                    すべてを愛し、少数を信頼し、誰も傷つけない。
+                </div>
+                <div class="text-content">
+                    모두를 사랑하고, 소수를 신뢰하며, 누구도 해치지 마라.
+                </div>
+                <div class="text-content">
+                    Love all, trust a few, do wrong to none.
+                </div>
+                <div class="text-content">
+                    爱所有人，信任少数人，不伤害任何人。
+                </div>
+                <div class="text-content">
+                    Aime tous, fais confiance à peu, ne fais de tort à personne.
+                </div>
+                <div class="text-content">
+                    Ama tutti, fidati di pochi, non far torto a nessuno.
+                </div>
+            </div>
+            <div class="stripe">
+                <div class="text-content active">
+                    El tiempo es el más sabio de los consejeros.
+                </div>
+                <div class="text-content">
+                    Zeit ist der weiseste Ratgeber von allen.
+                </div>
+                <div class="text-content">
+                    時は最も賢明な助言者である。
+                </div>
+                <div class="text-content">
+                    시간은 가장 현명한 조언자이다.
+                </div>
+                <div class="text-content">
+                    Time is the wisest counselor of all.
+                </div>
+                <div class="text-content">
+                    时间是最明智的顾问。
+                </div>
+                <div class="text-content">
+                    Le temps est le plus sage des conseillers.
+                </div>
+                <div class="text-content">
+                    Il tempo è il più saggio dei consiglieri.
+                </div>
+            </div>
+            <div class="stripe">
+                <div class="text-content active">
+                    Ich bin eine Katze. Ich habe noch keinen Namen.
+                </div>
+                <div class="text-content">
+                    吾輩は猫である。名前はまだ無い。
+                </div>
+                <div class="text-content">
+                    나는 고양이다. 아직 이름이 없다.
+                </div>
+                <div class="text-content">
+                    I am a cat. I don't have a name yet.
+                </div>
+                <div class="text-content">
+                    我是一只猫。我还没有名字。
+                </div>
+                <div class="text-content">
+                    Je suis un chat. Je n'ai pas encore de nom.
+                </div>
+                <div class="text-content">
+                    Sono un gatto. Non ho ancora un nome.
+                </div>
+                <div class="text-content">
+                    Soy un gato. Todavía no tengo nombre.
+                </div>
+            </div>
+            <div class="stripe">
+                <div class="text-content active">
+                    인생은 다른 계획을 세우느라 바쁜 동안 일어나는 것이다.
+                </div>
+                <div class="text-content">
+                    Life is what happens while you're busy making other plans.
+                </div>
+                <div class="text-content">
+                    生活就是当你忙着制定其他计划时发生的事。
+                </div>
+                <div class="text-content">
+                    La vie est ce qui arrive pendant que vous faites d'autres projets.
+                </div>
+                <div class="text-content">
+                    La vita è ciò che ti accade mentre sei impegnato a fare altri progetti.
+                </div>
+                <div class="text-content">
+                    La vida es lo que pasa mientras estás ocupado haciendo otros planes.
+                </div>
+                <div class="text-content">
+                    Das Leben ist das, was passiert, während du andere Pläne machst.
+                </div>
+                <div class="text-content">
+                    人生とは、他の計画を立てている間に起こることだ。
+                </div>
+            </div>
+            <div class="stripe">
+                <div class="text-content active">
+                    The journey of a thousand miles begins with a single step.
+                </div>
+                <div class="text-content">
+                    千里之行，始于足下。
+                </div>
+                <div class="text-content">
+                    Un voyage de mille lieues commence par un seul pas.
+                </div>
+                <div class="text-content">
+                    Un viaggio di mille miglia comincia con un solo passo.
+                </div>
+                <div class="text-content">
+                    Un viaje de mil millas comienza con un solo paso.
+                </div>
+                <div class="text-content">
+                    Eine Reise von tausend Meilen beginnt mit einem einzigen Schritt.
+                </div>
+                <div class="text-content">
+                    千里の道も一歩から。
+                </div>
+                <div class="text-content">
+                    천리 길도 한 걸음부터.
+                </div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <h1>NoLingo</h1>
+            <p></p>
+            <a href="https://apps.apple.com/app/nolingo-screen-translator/id6683311090?mt=12" class="download-btn">Download on App Store</a>
+        </div>
+        <a href="#features" class="scroll-down">Scroll Down ↓</a>
+    </section>
+
+    <div id="features" class="container">
+        <div class="mac-container">
+            <div class="mac-frame">
+                <div class="translation-demo">
+                    <div class="floating-text top">明日の朝までに第3四半期の財務報告書を確認してください。</div>
+                    <div class="translation-overlay top">Please review the Q3 financial report by tomorrow morning.</div>
+                    <div class="floating-text bottom">新しい機能の開発が予定より早く完了しました。</div>
+
+                    <div class="translation-overlay bottom">
+                        The development of new features was completed ahead of schedule.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h2>NoLingo</h2>
+            <ul class="feature-list">
+                <li class="feature-item" style="--index: 0">Optimized for Apple Silicon</li>
+                <li class="feature-item" style="--index: 1">Translate all text on screen</li>
+                <li class="feature-item" style="--index: 2">Low latency, high accuracy</li>
+                <li class="feature-item" style="--index: 3">No network required</li>
+            </ul>
+
+            <h2>Supported Languages</h2>
+            <ul class="language-list">
+                <li class="language-item active" data-lang="en">English</li>
+                <li class="language-item" data-lang="fr">French (Français)</li>
+                <li class="language-item" data-lang="it">Italian (Italiano)</li>
+                <li class="language-item" data-lang="es">Spanish (Español)</li>
+                <li class="language-item" data-lang="de">German (Deutsch)</li>
+                <li class="language-item" data-lang="ja">Japanese (日本語)</li>
+                <li class="language-item" data-lang="ko">Korean (한국어)</li>
+                <li class="language-item" data-lang="zh">Chinese (中文)</li>
+            </ul>
+            <a href="https://apps.apple.com/app/nolingo-screen-translator/id6683311090?mt=12" class="download-btn" style="margin-top: 2rem;">Download on App Store</a>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Text content rotation
+        const stripes = document.querySelectorAll('.stripe');
+        
+        stripes.forEach(stripe => {
+            setInterval(() => {
+                if (!stripe.matches(':hover')) {
+                    const texts = stripe.querySelectorAll('.text-content');
+                    const activeText = stripe.querySelector('.text-content.active');
+                    const nextText = activeText.nextElementSibling || texts[0];
+                    
+                    activeText.classList.remove('active');
+                    nextText.classList.add('active');                    
+                }
+            }, 2000 + Math.random() * 2000);
+        });
+
+        // Typing animation for subtitle
+        const subtitles = [
+            "Real-time screen translation without network",
+            "无需网络的实时屏幕翻译",
+            "Traduction d'écran en temps réel sans réseau",
+            "Traduzione dello schermo in tempo reale senza rete",
+            "Traducción de pantalla en tiempo real sin red",
+            "Echtzeit-Bildschirmübersetzung ohne Netzwerk",
+            "ネットワークなしのリアルタイム画面翻訳",
+            "네트워크 없는 실시간 화면 번역"
+        ];
+
+        let currentSubtitleIndex = 0;
+        const subtitleElement = document.querySelector('.hero-content p');
+
+        function typeSubtitle(text, index = 0) {
+            if (index < text.length) {
+                subtitleElement.textContent = text.substring(0, index + 1);
+                setTimeout(() => typeSubtitle(text, index + 1), 10);
+            } else {
+                setTimeout(deleteSubtitle, 1700);
+            }
+        }
+
+        function deleteSubtitle() {
+            const text = subtitleElement.textContent;
+            if (text.length > 0) {
+                subtitleElement.textContent = text.substring(0, text.length - 1);
+                setTimeout(deleteSubtitle, 5);
+            } else {
+                currentSubtitleIndex = (currentSubtitleIndex + 1) % subtitles.length;
+                setTimeout(() => typeSubtitle(subtitles[currentSubtitleIndex]), 500);
+            }
+        }
+
+        typeSubtitle(subtitles[0]);
+
+        // Translation demo language selection
+        const demoTexts = [
+            {
+                ja: "明日の朝までに第3四半期の財務報告書を確認してください。",
+                en: "Please review the Q3 financial report by tomorrow morning.",
+                zh: "请在明天早上之前审阅第三季度财务报告。",
+                fr: "Veuillez examiner le rapport financier du T3 d'ici demain matin.",
+                it: "Si prega di esaminare il rapporto finanziario del terzo trimestre entro domani mattina.",
+                es: "Por favor, revise el informe financiero del tercer trimestre para mañana por la mañana.",
+                de: "Bitte überprüfen Sie den Finanzbericht des dritten Quartals bis morgen früh.",
+                ko: "내일 아침까지 3분기 재무 보고서를 검토해 주세요。"
+            },
+            {
+                ja: "速報：科学者が普通の風邪の治療法を発見",
+                en: "Breaking news: Scientists discover potential cure for common cold",
+                zh: "突发新闻：科学家发现普通感冒的潜在治疗方法",
+                fr: "Flash info : Les scientifiques découvrent un remède potentiel contre le rhume",
+                it: "Ultime notizie: Gli scienziati scoprono una potenziale cura per il raffreddore comune",
+                es: "Última hora: Científicos descubren posible cura para el resfriado común",
+                de: "Eilmeldung: Wissenschaftler entdecken mögliche Heilung für Erkältungen",
+                ko: "속보: 과학자들이 감기 치료제 발견"
+            },
+            {
+                ja: "今日の天気：晴れ、最高気温25度、西からの軽い風",
+                en: "Today's weather: Sunny with a high of 25°C, light breeze from the west",
+                zh: "今日天气：晴朗，最高气温25度，西风微风",
+                fr: "Météo du jour : Ensoleillé avec un maximum de 25°C, légère brise d'ouest",
+                it: "Meteo oggi: Soleggiato con massima di 25°C, brezza leggera da ovest",
+                es: "El tiempo hoy: Soleado con máxima de 25°C, brisa suave del oeste",
+                de: "Wetter heute: Sonnig mit Höchsttemperatur von 25°C, leichte Westbrise",
+                ko: "오늘의 날씨: 맑음, 최고기온 25도, 서풍 약함"
+            },
+            {
+                ja: "新作映画「スターライトドリーム」が記録的な初週興行収入を記録",
+                en: "New movie 'Starlight Dreams' tops box office with record opening",
+                zh: "新电影《星光梦》创下开画纪录，领跑票房",
+                fr: "Le nouveau film 'Rêves d'étoiles' en tête du box-office avec un record d'ouverture",
+                it: "Il nuovo film 'Sogni di stelle' in testa al botteghino con un'apertura record",
+                es: "Nueva película 'Sueños de estrellas' lidera taquilla con estreno récord",
+                de: "Neuer Film 'Sternenlicht-Träume' führt Kinocharts mit Rekordstart an",
+                ko: "새 영화 '스타라이트 드림즈' 역대 최고 오프닝 기록"
+            },
+            {
+                ja: "笑！猫が自分の影を10分間追いかけ続けてるの見た 😂",
+                en: "LOL! Just saw a cat trying to catch its own shadow for 10 minutes straight 😂",
+                zh: "笑死！刚看到一只猫追自己的影子追了整整10分钟 😂",
+                fr: "MDR ! Je viens de voir un chat essayer d'attraper son ombre pendant 10 minutes 😂",
+                it: "LOL! Ho appena visto un gatto che cercava di prendere la sua ombra per 10 minuti 😂",
+                es: "¡LOL! Acabo de ver a un gato intentando atrapar su sombra durante 10 minutos 😂",
+                de: "LOL! Hab grade eine Katze gesehen, die 10 Minuten lang ihren eigenen Schatten jagt 😂",
+                ko: "ㅋㅋㅋ 고양이가 자기 그림자 잡으려고 10분동안 노력하는거 봤음 😂"
+            },
+            {
+                ja: "生きるべきか、死ぬべきか、それが問題だ。",
+                en: "To be, or not to be, that is the question.",
+                zh: "生存还是毁灭，这是一个问题。",
+                fr: "Être ou ne pas être, telle est la question.",
+                it: "Essere o non essere, questo è il dilemma.",
+                es: "Ser o no ser, esa es la cuestión.",
+                de: "Sein oder Nichtsein, das ist hier die Frage.",
+                ko: "사느냐 죽느냐, 그것이 문제로다."
+            }
+        ];
+
+        const languageItems = document.querySelectorAll('.language-item');
+        const floatingTexts = document.querySelectorAll('.floating-text');
+        const translationOverlays = document.querySelectorAll('.translation-overlay');
+        let currentDemoText = 0;
+
+        // Get system language
+        const systemLang = navigator.language.split('-')[0];
+        const supportedLangs = ['en', 'zh', 'fr', 'it', 'es', 'de', 'ja', 'ko'];
+        
+        // Set initial language based on system language
+        let sourceLang = 'fr';  // Default source language is French
+        let targetLang = 'en';  // Default target language is English
+        
+        const updateLangSelection = () => {
+
+            // Set active language in UI
+            languageItems.forEach(item => {
+                if (item.getAttribute('data-lang') === targetLang) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+        if (supportedLangs.includes(systemLang)) {
+            // If system language is supported, use a different language for source
+            const otherLangs = supportedLangs.filter(lang => lang !== systemLang);
+            sourceLang = otherLangs[Math.floor(Math.random() * otherLangs.length)];
+            targetLang = systemLang;
+            
+            updateLangSelection();
+
+            // Set active language in UI
+            languageItems.forEach(item => {
+                if (item.getAttribute('data-lang') === targetLang) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        const updateTranslations = () => {
+            currentDemoText = (currentDemoText + 1) % demoTexts.length;
+            const activeLang = document.querySelector('.language-item.active').getAttribute('data-lang');
+            floatingTexts[0].textContent = demoTexts[currentDemoText][sourceLang];
+            translationOverlays[0].textContent = demoTexts[currentDemoText][targetLang];
+
+            currentDemoText = (currentDemoText + 1) % demoTexts.length;
+            floatingTexts[1].textContent = demoTexts[currentDemoText][sourceLang];
+            translationOverlays[1].textContent = demoTexts[currentDemoText][targetLang];
+        };
+
+        updateTranslations();
+        setInterval(() => {
+            updateTranslations();
+        }, 11000);
+
+        languageItems.forEach(item => {
+            item.addEventListener('click', () => {
+
+                const lang = item.getAttribute('data-lang');
+                targetLang = lang;
+                updateLangSelection();
+                floatingTexts[0].textContent = demoTexts[currentDemoText][sourceLang];
+                translationOverlays[0].textContent = demoTexts[currentDemoText][targetLang];
+                floatingTexts[1].textContent = demoTexts[currentDemoText][sourceLang];
+                translationOverlays[1].textContent = demoTexts[currentDemoText][targetLang];
+            });
+        });
+    </script>
+</body>
+</html>
