@@ -1,9 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GNKZ2CRF53"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-GNKZ2CRF53');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI-Doge - AI in Your Hands</title>
+
+    <!-- English Meta -->
+    <meta name="description" content="AI-Doge develops powerful AI applications for iOS and macOS, including FaceRefresh for photo restoration, Segment Anything for image editing, and NoLingo for screen translation.">
+    <meta name="keywords" content="AI apps, iOS apps, macOS apps, photo enhancement, screen translation, image segmentation, FaceRefresh, Segment Anything, NoLingo">
+
+    <!-- Chinese Meta -->
+    <meta name="description" lang="zh" content="AI-Doge 开发强大的 iOS 和 macOS AI 应用，包括照片修复应用 FaceRefresh、图像编辑工具 Segment Anything 和屏幕翻译软件 NoLingo。">
+    <meta name="keywords" lang="zh" content="AI应用, iOS应用, macOS应用, 照片增强, 屏幕翻译, 图像分割, FaceRefresh, Segment Anything, NoLingo">
+
+    <!-- Japanese Meta -->
+    <meta name="description" lang="ja" content="AI-Dogeは、写真修復アプリFaceRefresh、画像編集ツールSegment Anything、画面翻訳ソフトNoLingoなど、iOSとmacOS向けの強力なAIアプリケーションを開発しています。">
+    <meta name="keywords" lang="ja" content="AIアプリ, iOSアプリ, macOSアプリ, 写真修復, 画面翻訳, 画像分割, FaceRefresh, Segment Anything, NoLingo">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI-Doge - AI Apps for iOS and macOS">
+    <meta property="og:description" content="Powerful AI applications including photo restoration, image segmentation and screen translation for iOS and macOS devices.">
+    <meta property="og:image" content="resource/aidogeicon.jpg">
+    <meta property="og:url" content="https://aidoge.ai">
+    <meta property="og:type" content="website">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aidoge.ai">
+    
     <link rel="icon" type="image/jpg" href="resource/aidogeicon.jpg">
     <style>
         /* Previous styles remain unchanged until .product-info */
@@ -119,13 +152,14 @@
         }
 
         .product-image {
-            width: 100%; /* Take full width of container */
-            height: 100%; /* Take full height of container */
-            max-width: 600px; /* Add max-width to prevent too large images */
-            max-height: 600px; /* Add max-height to maintain aspect ratio */
+            width: 75%; /* Reduced from 100% */
+            height: 75%; /* Reduced from 100% */
+            max-width: 400px; /* Reduced from 600px */
+            max-height: 400px; /* Reduced from 600px */
+            margin: 0 auto; /* Center the image */
             background-size: cover;
             background-position: center;
-            border-radius: 60px; /* Increased border radius */
+            border-radius: 60px;
             transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
             box-shadow: 20px 20px 50px rgba(0,0,0,0.2);
             transition: all 0.5s ease;
@@ -187,13 +221,13 @@
         }
 
         .product-info .buy-now-button::before {
-            content: "🛒";             /* 添加购物车 emoji */
+            content: "🎁";             /* Changed from shopping cart to gift emoji */
             font-size: 1.2rem;        /* 设置图标大小 */
             margin-right: 0.3rem;     /* 图标和文字之间的间距 */
         }
         
         .product-info .buy-now-button {
-            background: #ff4444;
+            background: #44b544;      /* Changed to a more friendly green color */
             color: white;
             padding: 0.3rem 1.5rem;
             border-radius: 25px;
@@ -203,24 +237,6 @@
             gap: 0.5rem;
             border-bottom: none !important;
         }
-/* 
-        .product-info a[href*="Buy"]::before {
-            content: "🛒";
-            font-size: 1.2rem;
-        }
-
-        .product-info a[href*="Buy"]:hover {
-            background: #ff6666;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            border-bottom: none;
-            color: white;
-        }
-
-        .product-info a:not([href*="Buy"]):hover {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        } */
 
         .product-demo {
             width: 100%; /* Fill container width */
@@ -302,16 +318,6 @@
     </style>
 </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GNKZ2CRF53"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GNKZ2CRF53');
-</script>
-
 <body>
     <nav>
         <ul>
@@ -357,7 +363,7 @@
                 <div class="product-info">
                     <h3>FaceRefresh</h3>
                     <p>Repairs old, blurry, and scratched photos right on your device.</p>
-                    <a href="https://apps.apple.com/app/facerefresh-ai-photo-restorer/id6463642671" class="buy-now-button">Buy Now</a>
+                    <a href="https://apps.apple.com/app/facerefresh-ai-photo-restorer/id6463642671" class="buy-now-button">Try Free</a>
                     <a href="face_refresh_intro.html">Learn More →</a>
                 </div>
                 <div class="product-demo" style="background-image: url('resource/FaceRefresh.jpg');">
@@ -391,7 +397,7 @@
                 <div class="product-info">
                     <h3>Segment Anything</h3>
                     <p>Click to crop anything in Images on your iPhone.</p>
-                    <a href="https://apps.apple.com/app/segment-anything/id6447527235" class="buy-now-button">Buy Now</a>
+                    <a href="https://apps.apple.com/app/segment-anything/id6447527235" class="buy-now-button">Try Free</a>
                     <!-- <a href="https://apps.apple.com/app/segment-anything/id6447527235">Learn More →</a> -->
                     <a href="https://blog.aidoge.ai/projects/segment_anything/">Learn More →</a>
                 </div>
@@ -408,7 +414,7 @@
                 <div class="product-info">
                     <h3>Nolingo Screen Translator</h3>
                     <p>Translate all text on your screen in real-time without Network on your mac.</p>
-                    <a href="https://apps.apple.com/app/nolingo-screen-translator/id6683311090?mt=12" class="buy-now-button">Buy Now</a>
+                    <a href="https://apps.apple.com/app/nolingo-screen-translator/id6683311090" class="buy-now-button">Try Free</a>
                     <a href="nolingo_intro.html">Learn More →</a>
                 </div>
                 <div class="product-demo" style="background-image: url('resource/NoLingoDemo.jpg')"></div>
